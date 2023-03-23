@@ -11,17 +11,14 @@ import { MessagesServices } from './messages.service';
 
 @Controller('messages')
 export class MessagesController {
-  messagesServices: MessagesServices;
-  constructor() {
-    this.messagesServices = new MessagesServices();
-  }
+  constructor(public messagesServices: MessagesServices) {}
 
   @Get()
   listMessages() {
     return this.messagesServices.findAll();
   }
 
-  @Post()
+  @Post('/create')
   createMessages(@Body() body: createMessageDto) {
     return this.messagesServices.create(body.content);
   }
